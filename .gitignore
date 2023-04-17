@@ -129,4 +129,12 @@ dmypy.json
 .pyre/
 
 # Videos de test del proyecto
-tests/
+Tests/
+
+#Archivos de entrenamiento para YOLO
+YOLOv8/train
+YOLOv8/valid
+runs/
+
+#Backup de env
+env.rar

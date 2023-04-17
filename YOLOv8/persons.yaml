@@ -1,0 +1,6 @@
+train: D:\PERSONAL\Python\Re-Identificacion_OpenCV-GPU\YOLOv8\train\images
+val: D:\PERSONAL\Python\Re-Identificacion_OpenCV-GPU\YOLOv8\valid\images
+
+nc: 5
+# CLasses 0, 1, 2, 3, 4
+names: ["Alex", "Angel", "Diego", "Flor", "Jhon"]
