@@ -1,0 +1,6 @@
+train: D:\PERSONAL\Python\Re-Identificacion_OpenCV-GPU\YOLOv8\Face Detection\train\images
+val: D:\PERSONAL\Python\Re-Identificacion_OpenCV-GPU\YOLOv8\Face Detection\valid\images
+test: D:\PERSONAL\Python\Re-Identificacion_OpenCV-GPU\YOLOv8\Face Detection\test\images
+
+nc: 1
+names: ['face']

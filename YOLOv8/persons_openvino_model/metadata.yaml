@@ -1,0 +1,16 @@
+description: Ultralytics persons model trained on persons.yaml
+author: Ultralytics
+license: AGPL-3.0 https://ultralytics.com/license
+version: 8.0.81
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: Alex
+  1: Angel
+  2: Diego
+  3: Flor
+  4: Jhon

@@ -134,7 +134,9 @@ Tests/
 #Archivos de entrenamiento para YOLO
 YOLOv8/train
 YOLOv8/valid
+YOLOv8/Face Detection
 runs/
+Data_CTS
 
 #Backup de env
 env.rar

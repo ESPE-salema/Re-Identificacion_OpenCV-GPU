@@ -3,6 +3,7 @@ import imutils
 import os
 import time
 import numpy as np
+from numba import jit
 
 #print('imagePaths=', imagePaths)
 # ----------- READ DNN MODEL -----------
@@ -23,18 +24,16 @@ with open("YOLOv8/classe.txt", "r") as f:
 CONFIDENCE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.6
 
-cap = cv2.VideoCapture("Tests/Alex1_Cam1.mp4")
+cap = cv2.VideoCapture("Tests/Alex2_Cam1.mp4")
 # Load the model
-net = cv2.dnn.readNetFromONNX('YOLOv8/persons.onnx')
-
+net = cv2.dnn.readNet('YOLOv8/persons.onnx')
 
 def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     label = f'{class_name[class_id]} ({confidence:.2f})'
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), (0, 0, 255), 3)
     cv2.putText(img, label, (x - 10, y - 10),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-
-
+                cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 255, 0), 3)
+    
 def Salida(CUDA):
 
     init = time.time()
@@ -45,6 +44,7 @@ def Salida(CUDA):
     else:
         net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+        
 
     while True:
 
@@ -77,7 +77,7 @@ def Salida(CUDA):
             classes_scores = outputs[0][i][4:]
             (minScore, maxScore, minClassLoc, (x, maxClassIndex)
              ) = cv2.minMaxLoc(classes_scores)
-            if maxScore >= 0.2:
+            if maxScore >= 0.1:
                 box = [
                     outputs[0][i][0] - (0.5 * outputs[0][i][2]
                                         ), outputs[0][i][1] - (0.5 * outputs[0][i][3]),
@@ -86,7 +86,7 @@ def Salida(CUDA):
                 scores.append(maxScore)
                 class_ids.append(maxClassIndex)
 
-        result_boxes = cv2.dnn.NMSBoxes(boxes, scores, 0.2, 0.6)
+        result_boxes = cv2.dnn.NMSBoxes(boxes, scores, 0.25, 0.7)
 
         detections = []
         for i in range(len(result_boxes)):
@@ -125,6 +125,5 @@ def Salida(CUDA):
     #print("Verdaderos Negativos: ", VN)
     #print("Falsos Positivos: ", FP)
     #print("Falsos Negativos: ", FN)
-
 
 Salida(CUDA=True)
